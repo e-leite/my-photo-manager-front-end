@@ -13,9 +13,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { EventsComponent } from './events/events.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { EventsFormComponent } from './events-form/events-form.component';
 
 @NgModule({
-  declarations: [AppComponent, EventsComponent],
+  declarations: [AppComponent, EventsComponent, EventsFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
