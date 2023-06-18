@@ -1,0 +1,100 @@
+<div class="controls-container">
+  <mat-form-field>
+    <mat-label>Pesquisar por:</mat-label>
+    <input matInput type="text" />
+  </mat-form-field>
+  <span class="spacer"></span>
+  <button mat-raised-button color="primary">Adicionar</button>
+</div>
+<div class="table-container">
+  <div class="mat-elevation-z3">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="urlImage">
+        <th mat-header-cell *matHeaderCellDef>Imagem</th>
+        <td class="image first-line" mat-cell *matCellDef="let element">
+          <img [src]="element.urlImage" alt="" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td class="image-side first-line" mat-cell *matCellDef="let element">
+          {{ element.name }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef>Data inicio</th>
+        <td title="Data inicio: " mat-cell *matCellDef="let element">
+          {{ element.startDate | date : "dd/MM/yyyy" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="endDate">
+        <th mat-header-cell *matHeaderCellDef>Data fim</th>
+        <td title="Data fim: " mat-cell *matCellDef="let element">
+          {{ element.endDate | date : "dd/MM/yyyy" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="place">
+        <th mat-header-cell *matHeaderCellDef>Local</th>
+        <td title="Local" class="full-line" mat-cell *matCellDef="let element">
+          {{ element.place }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef>Cidade</th>
+        <td title="Cidade: " mat-cell *matCellDef="let element">
+          {{ element.city }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td title="Estado: " mat-cell *matCellDef="let element">
+          {{ element.state }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="progressStatus">
+        <th mat-header-cell *matHeaderCellDef>Situação do Evento</th>
+        <td title="Situação: " mat-cell *matCellDef="let element">
+          {{ element.progressStatus }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td title="Status: " mat-cell *matCellDef="let element">
+          {{ element.status }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td class="full-line last-line" mat-cell *matCellDef="let element">
+          <div class="action-buttons-container">
+            <button mat-icon-button color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
+  </div>
+</div>
