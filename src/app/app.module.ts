@@ -10,13 +10,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { EventsComponent } from './events/events.component';
+import { EventsTableComponent } from './events-table/events-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EventsFormComponent } from './events-form/events-form.component';
 
 @NgModule({
-  declarations: [AppComponent, EventsComponent, EventsFormComponent],
+  declarations: [AppComponent, EventsTableComponent, EventsFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

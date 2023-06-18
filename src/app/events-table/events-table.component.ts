@@ -4,10 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-events',
-  templateUrl: './events.component.html',
-  styleUrls: ['./events.component.scss'],
+  templateUrl: './events-table.component.html',
+  styleUrls: ['./events-table.component.scss'],
 })
-export class EventsComponent implements AfterViewInit, OnInit {
+export class EventsTableComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'urlImage',
     'name',
