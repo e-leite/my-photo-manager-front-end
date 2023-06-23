@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { EventsFormComponent } from './events-form/events-form.component';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { IbgeApiService } from './shared/ibge-api.service';
+import { EventsService } from './shared/events.service';
 
 @NgModule({
   declarations: [AppComponent, EventsTableComponent, EventsFormComponent],
@@ -27,6 +29,8 @@ import { IbgeApiService } from './shared/ibge-api.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule,
     MatDatepickerModule,
@@ -40,7 +44,11 @@ import { IbgeApiService } from './shared/ibge-api.service';
     MatTableModule,
     MatToolbarModule,
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }, IbgeApiService],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    IbgeApiService,
+    EventsService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
