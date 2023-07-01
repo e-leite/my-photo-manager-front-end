@@ -1,1 +1,101 @@
-<p>events-form works!</p>
+<h2 mat-dialog-title>Registro de eventos</h2>
+<form [formGroup]="form">
+  <mat-dialog-content>
+    <div class="main-container">
+      <div class="container-img" [class.imagem-grande]="bigImg">
+        <img #img [src]="url" (load)="onImageLoad($event)" />
+        <input
+          type="file"
+          id="upload-button"
+          accept="image/*"
+          (change)="onFolderSelect($event)"
+        />
+      </div>
+      <label for="upload-button"> Adicionar imagem </label>
+      <mat-form-field>
+        <mat-label>Nome do evento</mat-label>
+        <input matInput formControlName="name" #input maxlength="150" />
+        <mat-hint align="end">{{ input.value.length }}/150</mat-hint>
+        <mat-error *ngIf="form.get('name')?.invalid">{{
+          getErrorMessage("name")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Data inicio</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerStart"
+          id="startDate"
+          formControlName="startDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerStart"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+        <mat-hint>DD/MM/AAAA</mat-hint>
+        <mat-error *ngIf="form.get('startDate')?.invalid">{{
+          getErrorMessage("startDate")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Data Fim</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerEnd"
+          id="endDate"
+          formControlName="endDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerEnd"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+        <mat-hint>DD/MM/AAAA</mat-hint>
+        <mat-error *ngIf="form.get('endDate')?.invalid">{{
+          getErrorMessage("endDate")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Local</mat-label>
+        <input matInput formControlName="place" #input maxlength="150" />
+        <mat-hint align="end">{{ input.value.length }}/150</mat-hint>
+        <mat-error *ngIf="form.get('place')?.invalid">{{
+          getErrorMessage("place")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Selecione o Estado</mat-label>
+        <mat-select
+          formControlName="state"
+          [(value)]="selectedState"
+          (valueChange)="onSelectState()"
+        >
+          <mat-option *ngFor="let state of states" [value]="state.sigla">{{
+            state.nome
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Selecione a Cidade</mat-label>
+        <mat-select formControlName="city">
+          <mat-option *ngFor="let city of cities" [value]="city.nome">{{
+            city.nome
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="onSubmit()">
+      Salvar
+    </button>
+    <button mat-raised-button color="warn" (click)="closeDialog()">
+      Cancelar
+    </button>
+  </mat-dialog-actions>
+</form>
