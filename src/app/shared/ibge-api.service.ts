@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, take } from 'rxjs';
+import { Observable, take, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ import { Observable, take } from 'rxjs';
 export class IbgeApiService {
   constructor(private httpCliente: HttpClient) {}
 
-  getStates(): Observable<{}> {
+  getStates() {
     return this.httpCliente
       .get(
         `https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome`
@@ -16,7 +16,7 @@ export class IbgeApiService {
       .pipe(take(1));
   }
 
-  getCitiesByState(uf: string): Observable<{}> {
+  getCitiesByState(uf: string) {
     return this.httpCliente
       .get(
         `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`
