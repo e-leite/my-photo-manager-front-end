@@ -1,6 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { EventsFormComponent } from '../events-form/events-form.component';
+import { Event } from '../shared/models/event.model';
+import { EventsService } from '../shared/events.service';
 
 @Component({
   selector: 'app-events',
@@ -8,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./events-table.component.scss'],
 })
 export class EventsTableComponent implements AfterViewInit, OnInit {
+  constructor(public dialog: MatDialog, private eventsService: EventsService) {}
   displayedColumns: string[] = [
     'urlImage',
     'name',
@@ -20,49 +25,51 @@ export class EventsTableComponent implements AfterViewInit, OnInit {
     'status',
     'action',
   ];
-  dataSource = new MatTableDataSource<Event>(EVENT_DATA);
+
+  dataSource = new MatTableDataSource<Event>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    for (let i = 0; i < 20; i++) {
-      EVENT_DATA.push({
-        id: 1,
-        name:
-          Math.random().toString(36) +
-          ' ' +
-          Math.random().toString(36) +
-          ' ' +
-          Math.random().toString(36),
-        startDate: new Date(Date.now()),
-        endDate: new Date(Date.now()),
-        place: 'Parque de exposições',
-        city: 'Maringá',
-        state: 'PR',
-        progressStatus: 'em andamento',
-        status: 'ativo',
-        urlImage: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      });
-    }
-    console.log(EVENT_DATA);
+    this.getEvent();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-}
 
-export interface Event {
-  id: number;
-  name: string;
-  startDate: Date;
-  endDate: Date;
-  place: string;
-  city: string;
-  state: string;
-  progressStatus: string;
-  status: string;
-  urlImage: string;
-}
+  public openNewForm(): void {
+    this.dialog
+      .open(EventsFormComponent, {
+        position: { right: '0' },
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.getEvent();
+      });
+  }
 
-const EVENT_DATA: Event[] = [];
+  public openEditForm(event: Event): void {
+    this.dialog
+      .open(EventsFormComponent, {
+        position: { right: '0' },
+        data: event,
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.getEvent();
+      });
+  }
+
+  public deleteEvent(id: number): void {
+    this.eventsService.delete(id).subscribe(() => {
+      this.getEvent();
+    });
+  }
+
+  private getEvent(): void {
+    this.eventsService.getAll().subscribe((event) => {
+      this.dataSource.data = event;
+    });
+  }
+}

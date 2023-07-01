@@ -6,6 +6,10 @@
   padding: 0 10px 0 10px;
 }
 
+button.fab {
+  display: none;
+}
+
 .controls-container mat-form-field {
   width: 70%;
 }
@@ -47,20 +51,22 @@ td.mat-cell {
 }
 
 @media screen and (max-width: 600px) {
-  .controls-container {
-    position: relative;
-    flex-direction: column;
-    padding: 10px;
-  }
+  // .controls-container {
+  //   position: relative;
+  //   flex-direction: column;
+  //   padding: 10px;
+  // }
 
   .controls-container mat-form-field {
-    width: 100%;
+    width: 80%;
   }
 
-  .controls-container button {
-    position: absolute;
-    right: 10px;
-    bottom: -46px;
+  button.default {
+    display: none;
+  }
+
+  button.fab {
+    display: block;
   }
 
   table,
@@ -76,6 +82,10 @@ td.mat-cell {
 
   th.mat-header-cell {
     display: none;
+  }
+
+  tr.mat-header-row {
+    height: 0;
   }
 
   td.mat-cell {

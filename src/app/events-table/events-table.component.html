@@ -4,11 +4,21 @@
     <input matInput type="text" />
   </mat-form-field>
   <span class="spacer"></span>
-  <button mat-raised-button color="primary">Adicionar</button>
+  <button
+    class="default"
+    mat-raised-button
+    color="primary"
+    (click)="openNewForm()"
+  >
+    Adicionar
+  </button>
+  <button class="fab" mat-mini-fab color="primary" (click)="openNewForm()">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>
 <div class="table-container">
   <div class="mat-elevation-z3">
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="urlImage">
         <th mat-header-cell *matHeaderCellDef>Imagem</th>
         <td class="image first-line" mat-cell *matCellDef="let element">
@@ -76,10 +86,18 @@
         <th mat-header-cell *matHeaderCellDef>Ações</th>
         <td class="full-line last-line" mat-cell *matCellDef="let element">
           <div class="action-buttons-container">
-            <button mat-icon-button color="primary">
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="openEditForm(element)"
+            >
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button color="warn">
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="deleteEvent(element.id)"
+            >
               <mat-icon>delete</mat-icon>
             </button>
           </div>
